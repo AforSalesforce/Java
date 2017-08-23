@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class EditDistance {
+
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter the first string");
+		String s1=in.nextLine();
+		System.out.println("Enter the second string");
+		String s2=in.nextLine();
+		int a=EDITDISTANCE(s2,s1);
+		System.out.println("Total number of edition required is "+a);
+	}
+
+	private static int EDITDISTANCE(String s1, String s2) {
+		int a[][]=new int[s1.length()+1][s2.length()+1];
+		for(int i=0;i<a[0].length;i++)
+		{
+			a[0][i]=i;
+		}
+		for(int j=0;j<a.length;j++)
+		{
+			a[j][0]=j;
+		}
+		for(int p=1;p<=s1.length();p++)
+		{
+			for(int q=1;q<=s2.length();q++)
+
+					{
+				if(s1.charAt(p-1)==s2.charAt(q-1))
+				{
+					a[p][q]=a[p-1][q-1];
+				}
+				else
+				{
+					a[p][q]=1+Math.min(a[p-1][q],Math.min(a[p-1][q-1],a[p][q-1]));
+				}
+				
+					}
+		}
+		return a[s1.length()][s2.length()];
+	}
+
+}
