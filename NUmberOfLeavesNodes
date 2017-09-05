@@ -1,0 +1,15 @@
+
+public class NumberOfLeafNodes {
+	
+	public int NumOfLeafNodes(Node head)
+	{
+		if(head==null)
+			return 0;
+		if(head.left==null && head.right==null)
+		{
+			return 1;
+		}
+		return NumOfLeafNodes(head.left)+NumOfLeafNodes(head.right);
+	}
+	
+}
