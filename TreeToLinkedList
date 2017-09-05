@@ -1,0 +1,48 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class TreeToLinkedList
+{
+	Queue<Node> q;
+	
+	public TreeToLinkedList() {
+		// TODO Auto-generated constructor stub
+		q=new LinkedList<>();
+	}
+	public Node ConvetToList(Node node)
+	{
+		q.add(node);
+		Node head=null;
+		while(!q.isEmpty())
+		{
+			Node nod=q.peek();
+			if(nod.left!=null)
+			{
+				q.add(nod.left);
+			}
+			if(nod.right!=null)
+			{
+				q.add(nod.right);
+			}
+			if(head==null)
+			{
+			nod.right=null;
+			nod.left=null;
+			head=nod;
+			}
+			else
+			{
+				Node tem=head;
+				while(tem.right!=null)
+					tem=tem.right;
+					
+				tem.right=nod;
+				nod.left=tem;
+				nod.right=null;
+			}
+			q.remove();
+		}
+		return head;
+	}
+}
+
