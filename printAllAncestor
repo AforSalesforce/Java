@@ -1,0 +1,24 @@
+
+public class PrintAllAncestro {
+	
+	
+	public boolean PrintAncestors(Node root,int target)
+	{
+		if(root==null)
+		{
+			return false;
+		}
+		if(root.data==target)
+		{
+			return true;
+		}
+		 
+		if(PrintAncestors(root.left, target)||PrintAncestors(root.right,target))
+		{
+			System.out.println(root.data+" ");
+			return true;
+		}
+		return false;	
+	}
+
+}
