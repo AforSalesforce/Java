@@ -1,0 +1,26 @@
+
+public class hasPathSum {
+
+	public boolean RootToleafPathSum(Node root,int sum)
+	{
+		if(root==null)
+		{
+			return (sum==0);
+		}
+		else
+		{
+			boolean ans=false;
+			
+			int subsum=sum-root.data;
+			
+			if(subsum==0 && root.left==null && root.right==null)
+				return true;
+			if(root.left!=null)
+				ans=ans||RootToleafPathSum(root.left, subsum);
+			if(root.right!=null)
+				ans=ans||RootToleafPathSum(root.right, subsum);
+			return ans;
+		}
+	}
+
+}
