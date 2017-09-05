@@ -1,0 +1,61 @@
+import java.util.Scanner;
+class TreeNode
+{
+	int data;
+	TreeNode left;
+	TreeNode right;
+	
+	public static TreeNode newNode(int data)
+	{
+		TreeNode tr=new TreeNode();
+		tr.data=data;
+		tr.left=null;
+		tr.right=null;
+		return tr;
+	}
+}
+class CreateBstFromSortedArray
+{
+	public TreeNode createTree(int a[],int start,int end)
+	{
+		if(start>end)
+			return null;
+		int mid=(start+end)/2;
+		TreeNode node=TreeNode.newNode(a[mid]);
+		
+		node.left=createTree(a,start,mid-1);
+		
+		node.right=createTree(a,mid+1,end);
+		
+		return node;
+	}
+}
+public class SortedArrayToBST {
+
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		System.out.println("Entre the number of element in the array");
+		int n=in.nextInt();
+		int a[]=new int[n];
+		System.out.println("Enter the element to the array");
+		for(int i=0;i<n;i++)
+		{
+			a[i]=in.nextInt();
+		}
+		CreateBstFromSortedArray bt=new CreateBstFromSortedArray();
+		int start=0;
+		int end=n-1;
+		TreeNode root=bt.createTree(a, start, end);
+		print(root);
+	}
+
+	private static void print(TreeNode root) {
+		while(root==null)
+			return;
+		print(root.left);
+		System.out.println(root.data+" ");
+		print(root.right);
+		
+	}
+
+}
