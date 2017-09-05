@@ -1,0 +1,14 @@
+
+class NumberOfFullNodes {
+	public int FullNodes(Node head) {
+		if(head==null)
+			return 0;
+		if(head.left==null && head.right==null)//for leafnodes
+			return 0;
+		if(head.left==null||head.right==null)//for nodes having only one child
+			return 0;
+		return FullNodes(head.left)+1+FullNodes(head.right);
+		
+		
+	}
+}
