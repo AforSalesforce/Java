@@ -1,0 +1,117 @@
+
+
+class treeNode
+{
+	int data;
+	treeNode left;
+	treeNode right;
+	
+	public static treeNode newNode(int data)
+	{
+		treeNode node=new treeNode();
+		node.data=data;
+		node.left=null;
+		node.right=null;
+		return node;
+	}
+}
+class BalancedTree
+{
+	public treeNode CreateTree(treeNode node,int data)
+	{
+		treeNode nod=node;
+		treeNode temp=null;
+		if(nod==null)
+		{
+			nod=treeNode.newNode(data);
+			node=nod;
+			return nod;
+		}
+			while(nod!=null)
+			{
+				if(nod.data<data)
+				{
+					temp=nod;
+					nod=nod.right;
+				}
+				else
+				{
+					temp=nod;
+					nod=nod.left;
+				}
+			}
+			if(temp.data<data)
+			{
+				temp.right=treeNode.newNode(data);
+				
+			}
+			else
+			{
+				temp.left=treeNode.newNode(data);
+			}
+			return node;
+	}
+}
+class Isbalanced
+{
+	public int HeightDif(treeNode node)
+	{
+		if(node==null)
+			return 0;
+		int hl=HeightDif(node.left);
+		int hr=HeightDif(node.right);
+		if(hl==-1||hr==-1)return -1;
+		if(Math.abs(hl-hr)>1)
+		{
+			return -1;
+		}
+		return 1+Math.max(hl, hr);
+	}
+}
+public class isBalancedTree {
+
+	public static void main(String[] args) {
+		BalancedTree bt=new BalancedTree();
+		treeNode root=null,temp=null;
+		root=bt.CreateTree(root, 10);/*	  10
+										/     \
+		 								5       15
+		 							    /  \    /  \
+		 							   	4	9   11   16
+		 							   /               \
+		 							   3	             17
+		 							                       \
+		 							                         18*/
+		temp=bt.CreateTree(root, 5);
+		temp=bt.CreateTree(root, 9);
+		temp=bt.CreateTree(root, 4);
+		temp=bt.CreateTree(root, 3);
+		temp=bt.CreateTree(root, 15);
+		temp=bt.CreateTree(root, 11);
+		temp=bt.CreateTree(root, 16);
+		temp=bt.CreateTree(root, 17);
+		temp=bt.CreateTree(root, 18);
+		print(root);
+		
+		Isbalanced ba=new Isbalanced();
+		int x=ba.HeightDif(root);
+		if(x==-1)
+		{
+			System.out.println("tree is unbalanced!!!!");
+		}
+		else
+		{
+			System.out.println("tree is balanced!!!");
+		}
+	}
+
+	private static void print(treeNode root) {
+		while(root==null)
+			return ;
+		print(root.left);
+		System.out.print(root.data+" ");
+		print(root.right);
+		
+	}
+
+}
