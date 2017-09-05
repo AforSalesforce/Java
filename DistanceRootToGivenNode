@@ -1,0 +1,101 @@
+
+class NODE
+{
+	int data;
+	NODE left;
+	NODE right;
+	
+	public static NODE newNode(int value)
+	{
+		NODE n=new NODE();
+		n.data=value;
+		n.left=null;
+		n.right=null;
+		return n;
+		
+	}
+}
+
+class BINARYTREE
+{
+	public NODE addNode(int data,NODE head)
+	{
+		NODE temp=head;
+		NODE node=NODE.newNode(data);
+		if(head==null)
+		{
+			head=node;
+			return head;
+		}
+		
+		NODE prev=null;
+		
+		while(head!=null)
+		{
+			prev=head;
+			if(head.data>data)
+			{
+				head=head.left;
+			}
+			else
+			{
+				head=head.right;
+			}
+					}
+		if(prev.data>data)
+		{
+			prev.left=node;
+		}
+		else
+		{
+			prev.right=node;
+		}
+		return temp;
+		
+	}
+	
+	
+}
+class FindDistRootToGivenNode
+{
+	
+	static int count=0;
+	public boolean Distance(NODE head,int target)
+	{
+		if(head==null)
+		{
+			return false;
+		}
+		if(head.data==target)
+		{
+			return true;
+		}
+		if(Distance(head.left, target)||Distance(head.right, target))
+		{
+			count++;
+			return true;
+		}
+		return false;
+	}
+}
+public class DistenceRootToGivenNode {
+
+	public static void main(String[] args) {
+		
+		BINARYTREE bt=new BINARYTREE();
+		NODE head=null;
+		  head = bt.addNode(10, head);
+	        head = bt.addNode(15, head);
+	        head = bt.addNode(5, head);
+	        head = bt.addNode(7, head);
+	        head = bt.addNode(19, head);
+	        head = bt.addNode(20, head);
+	        head = bt.addNode(-1, head);
+	        head = bt.addNode(21, head);
+		FindDistRootToGivenNode obj=new FindDistRootToGivenNode();
+		obj.Distance(head, 21);
+		System.out.println("distence is "+obj.count);
+
+	}
+
+}
