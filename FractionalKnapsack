@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class fractionalKnapsack {
+
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter the number of elemnt");
+		int n=in.nextInt();
+		float a[][]=new float[2][n];
+		System.out.println("Enter the weigth of the knapsack");
+		float w=in.nextFloat();
+		System.out.println("Enter the value and weight");
+		for(int i=0;i<2;i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+				a[i][j]=in.nextFloat();
+			}
+		}
+		FindOptimal(a,2,n,w);
+
+	}
+
+	private static void FindOptimal(float[][] a, int i, int n,float w) {
+		float x[]=new float[n];
+		int r=0;
+		for(int j=0;j<n;j++)
+		{
+			x[j]=a[r][j]/a[r+1][j];
+			r=0;
+		}
+		for(int j=0;j<n;j++)
+		{
+			System.out.print(x[j]+" ");
+		}
+		
+		float solution[]=new float[n];
+		int index=0;
+		int profit=0,k=0;
+		for(k=0;k<n;k++)
+		{
+			index=Compare(x,index);
+			if(a[1][index]<=w)
+			{
+				solution[index]=1;
+				w=w-a[1][index];
+				profit+=a[0][index];
+				
+			}
+			else
+			{
+				break;
+			}
+		}
+		if(k<=n)
+		{
+			solution[index]=(w/a[1][index]);
+			profit+=a[0][index]*(w/a[1][index]);
+			
+		}
+		for(int j=0;j<n;j++)
+		{
+			if(solution[j]==0)
+			{
+				System.out.println("Not taken.. "+ j +"th item");
+			}
+			else
+			{
+				System.out.println("taken "+ j +"th item"+ solution[j] +"quantity");
+			}
+		}
+		
+		System.out.println("total frofit "+profit);
+		
+	}
+
+	private static int Compare(float[] x, int index) {
+		float max=0;
+		index=-1;
+		for(int i=0;i<x.length-1;i++)
+		{
+			int com=Float.compare(x[i], x[i+1]);
+			if(com>0)
+			{
+				max=x[i];
+				index=i;
+			}
+			else
+			{
+				max=x[i+1];
+			}
+		}
+		x[index]=0.0f;
+		return index;
+	}
+
+}
